@@ -7,6 +7,22 @@
     <title>Notes</title>
     <link rel="stylesheet" href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <style>
+       body {
+            background-color: #121212;
+            color: #ffffff;
+       }
+        .navbar {
+            background-color: black !important;
+        }
+        .card {
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
 
