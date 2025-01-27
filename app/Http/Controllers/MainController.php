@@ -63,7 +63,9 @@ class MainController extends Controller
 
     public function editNote($id){
         $id = Operations::decryptId($id);
-
+        if ($id  === null){
+            return redirect()->route('home');
+        }
         // load view
         $note = Note::find($id);
 
@@ -99,7 +101,9 @@ class MainController extends Controller
 
         // decrypt note_id
         $id = Operations::decryptId($request->note_id);
-
+        if ($id  === null){
+            return redirect()->route('home');
+        }
         // load note
         $note = Note::find($id);
 
@@ -114,7 +118,9 @@ class MainController extends Controller
 
     public function deleteNote($id){
         $id = Operations::decryptId($id);
-
+        if ($id  === null){
+            return redirect()->route('home');
+        }
         // load note
 
         $note = Note::find($id);
@@ -127,13 +133,24 @@ class MainController extends Controller
     public function deleteNoteConfirm($id){
         // check if id is encrypt
             $id = Operations::decryptId($id);
+            if ($id  === null){
+                return redirect()->route('home');
+            }
         // load note
             $note = Note::find($id);
         // 1. hard delte
             // $note->delete();
         // 2 soft delete
-            $note->deleted_at = date('Y:m:d H:i:s');
-            $note->save();
+            // $note->deleted_at = date('Y:m:d H:i:s');
+            // $note->save();
+        // Soft delete in model
+
+        $note->delete();
+
+        //force delete in model
+
+        // $note->forceDelete();
+
         // return to home
         return redirect()->route('home');
     }
